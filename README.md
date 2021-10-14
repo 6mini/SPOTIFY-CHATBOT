@@ -7,5 +7,5 @@
 ### 21.10.14. 1700i
 - Spotify API AWS PostgreSQL, DynamoDB 적재
 - S3 partition 구분 후 적재
-- Athene data lake 설정
-- EMR 이용 Apach Spark 연동
+- Athena data lake 설정
+- EMR 이용 Zeppelin 연동 후 Spark 사용 확인
