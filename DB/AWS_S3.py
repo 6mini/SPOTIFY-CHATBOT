@@ -33,6 +33,22 @@ def main():
         logging.error("could not connect to rds")
         sys.exit(1)
 
+    # artists parquet
+    cursor.execute('SELECT * FROM artists')
+    colnames = [d[0] for d in cursor.description]
+    artists = [dict(zip(colnames, row)) for row in cursor.fetchall()]
+    artists = pd.DataFrame(artists)
+
+    artists.to_parquet('artists.parquet', engine='pyarrow', compression='snappy')
+
+    dt = datetime.utcnow().strftime('%Y-%m-%d')
+    s3 = boto3.resource('s3')
+    object = s3.Object('6mini-spotify', 'artists/dt={}/artists.parquet'.format(dt))
+    data = open('artists.parquet', 'rb')
+    object.put(Body=data)
+
+    sys.exit()
+
     headers = get_headers(client_id, client_secret)
 
     # RDS - 아티스트 ID를 가져오고

@@ -9,3 +9,7 @@
 - S3 partition 구분 후 적재
 - Athena data lake 설정
 - EMR 이용 Zeppelin 연동 후 Spark 사용 확인
+
+### 21.10.15. 0105i
+- Spark 
+  - RDD, DF, UDF, JOIN, SQL
