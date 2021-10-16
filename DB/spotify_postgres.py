@@ -8,14 +8,14 @@ import time
 import csv
 
 
-client_id = ""
-client_secret = ""
+client_id = "74cbd487458843f1ad3f5fa1e914c02f"
+client_secret = "752e4ed11062473f9da9076c4499d51b"
 
-host = ""
+host = "spotify.cjwptwa04yyi.ap-northeast-2.rds.amazonaws.com"
 port = 5432
-username = ""
+username = "sixmini"
 database = "postgres"
-password = ""
+password = "12345678"
 
 
 def main():
@@ -49,15 +49,15 @@ def main():
 
     # Create Table
     cursor.execute("""CREATE TABLE artists (
-        id VARCHAR PRIMARY KEY NOT NULL,
-        name VARCHAR,
+        id VARCHAR(255) PRIMARY KEY NOT NULL,
+        name VARCHAR(255),
         followers INT,
         popularity INT,
-        url VARCHAR,
-        image_url VARCHAR)
+        url VARCHAR(255),
+        image_url VARCHAR(255))
     """)
     conn.commit()
-    # # sys.exit()
+    # sys.exit()
 
     
     # Spotify Search API
@@ -105,8 +105,8 @@ def main():
 
     # Create Table
     cursor.execute("""CREATE TABLE artist_genre (
-        artist_id VARCHAR PRIMARY KEY NOT NULL,
-        genre VARCHAR,
+        artist_id VARCHAR(255) PRIMARY KEY NOT NULL,
+        genre VARCHAR(255),
         FOREIGN KEY(artist_id) REFERENCES artists(id))
     """)
     conn.commit()

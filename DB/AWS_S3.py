@@ -10,14 +10,14 @@ from datetime import datetime
 import pandas as pd
 import jsonpath  # pip3 install jsonpath --user
 
-client_id = ""
-client_secret = ""
+client_id = "74cbd487458843f1ad3f5fa1e914c02f"
+client_secret = "752e4ed11062473f9da9076c4499d51b"
 
-host = ""
+host = "spotify.cjwptwa04yyi.ap-northeast-2.rds.amazonaws.com"
 port = 5432
-username = ""
+username = "sixmini"
 database = "postgres"
-password = ""
+password = "12345678"
 
 
 def main():
@@ -34,25 +34,25 @@ def main():
         sys.exit(1)
 
     # artists parquet
-    cursor.execute('SELECT * FROM artists')
-    colnames = [d[0] for d in cursor.description]
-    artists = [dict(zip(colnames, row)) for row in cursor.fetchall()]
-    artists = pd.DataFrame(artists)
+    # cursor.execute('SELECT * FROM artists')
+    # colnames = [d[0] for d in cursor.description]
+    # artists = [dict(zip(colnames, row)) for row in cursor.fetchall()]
+    # artists = pd.DataFrame(artists)
 
-    artists.to_parquet('artists.parquet', engine='pyarrow', compression='snappy')
+    # artists.to_parquet('artists.parquet', engine='pyarrow', compression='snappy')
 
-    dt = datetime.utcnow().strftime('%Y-%m-%d')
-    s3 = boto3.resource('s3')
-    object = s3.Object('6mini-spotify', 'artists/dt={}/artists.parquet'.format(dt))
-    data = open('artists.parquet', 'rb')
-    object.put(Body=data)
+    # dt = datetime.utcnow().strftime('%Y-%m-%d')
+    # s3 = boto3.resource('s3')
+    # object = s3.Object('6mini-spotify', 'artists/dt={}/artists.parquet'.format(dt))
+    # data = open('artists.parquet', 'rb')
+    # object.put(Body=data)
 
-    sys.exit()
+    # sys.exit()
 
     headers = get_headers(client_id, client_secret)
 
     # RDS - 아티스트 ID를 가져오고
-    cursor.execute("SELECT id FROM artists LIMIT 10")
+    cursor.execute("SELECT id FROM artists")
     top_track_keys = {
         "id": "id",
         "name": "name",
@@ -63,15 +63,14 @@ def main():
     # Parquet화 : 스파크가 좋아하는 형태
     top_tracks = []
     for (id, ) in cursor.fetchall():
-
         URL = "https://api.spotify.com/v1/artists/{}/top-tracks".format(id)
         params = {
             'country': 'US'
         }
-        r = requests.get(URL, params=params, headers=headers)
 
+        r = requests.get(URL, params=params, headers=headers)
         raw = json.loads(r.text)
-        
+
         for i in raw['tracks']:
             top_track = {}
             for k, v in top_track_keys.items():
@@ -101,7 +100,6 @@ def main():
     tracks_batch = [track_ids[i: i+100] for i in range(0, len(track_ids), 100)]
     audio_features = []
     for i in tracks_batch:
-
         ids = ','.join(i)
         URL = "https://api.spotify.com/v1/audio-features/?ids={}".format(ids)
 
