@@ -8,14 +8,14 @@ import time
 import csv
 
 
-client_id = "74cbd487458843f1ad3f5fa1e914c02f"
-client_secret = "752e4ed11062473f9da9076c4499d51b"
+client_id = ""
+client_secret = ""
 
-host = "spotify.cjwptwa04yyi.ap-northeast-2.rds.amazonaws.com"
+host = ""
 port = 5432
-username = "sixmini"
+username = ""
 database = "postgres"
-password = "12345678"
+password = ""
 
 
 def main():
