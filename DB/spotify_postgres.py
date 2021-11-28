@@ -47,6 +47,17 @@ def main():
     # sys.exit()
 
 
+    # Test
+    # cursor.execute("INSERT INTO artists ( id, name, followers, popularity, url, image_url ) VALUES ( %s, %s, %s, %s, %s, %s ) ON CONFLICT ( id ) DO UPDATE SET  id=%s, name=%s, followers=%s, popularity=%s, url=%s, image_url=%s ", ['3Nrfpe0tUJi4K4DXYWgMUX', 'BTS', 39936310, 96, 'https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX', 'https://i.scdn.co/image/ab6761610000e5eb82a5d58059f81867b871d8b6', '3Nrfpe0tUJi4K4DXYWgMUX', 'BTS', 39936310, 96, 'https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX', 'https://i.scdn.co/image/ab6761610000e5eb82a5d58059f81867b871d8b6'])
+    # conn.commit()
+    # sys.exit()
+
+
+    # Test
+    # cursor.execute("INSERT INTO artist_genre ( artist_id, genre ) VALUES ( %s, %s ) ON CONFLICT ( artist_id ) DO UPDATE SET  artist_id=%s, genre=%s", ['5TnQc2N1iKlFjYD7CPGvFc', 'k-pop', '5TnQc2N1iKlFjYD7CPGvFc', 'k-pop'])
+    # conn.commit()
+    # sys.exit()
+
     # Create Table
     cursor.execute("""CREATE TABLE artists (
         id VARCHAR(255) PRIMARY KEY NOT NULL,
@@ -145,7 +156,7 @@ def main():
     conn.commit()
     cursor.close()
 
-    sys.exit(0)
+    # sys.exit(0)
 
 
 
@@ -239,6 +250,9 @@ def insert_row(cursor, data, table):
     columns = ', '.join(data.keys())
     key_placeholders = ', '.join(['{0}=%s'.format(k) for k in data.keys()])
     sql = "INSERT INTO %s ( %s ) VALUES ( %s ) ON CONFLICT ( %s ) DO UPDATE SET  %s" % (table, columns, placeholders, list(data.keys())[0] ,key_placeholders)
+    # print(sql)
+    # print(list(data.values())*2)
+    # sys.exit()
     cursor.execute(sql, list(data.values())*2)
 
 
