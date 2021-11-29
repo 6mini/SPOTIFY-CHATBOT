@@ -53,7 +53,7 @@
 - Spotify API
     - RDS(PostgreSQL)에 Artist의 top track, image 저장
     - DynamoDB에 Artist 장르 정보 저장
-    - EC2 Crontab 이용 Artist의 top track, audio feature 저장 자동화
+    - S3에 EC2 Crontab 이용 Artist의 top track, audio feature 저장 자동화
 - Athena에서 S3 Data 이용 유사도 산출 후 RDS(PostgreSQL) 저장
 - EMR 이용 Apach Spark에서 분석 및 시각화 핸들링
 - Lambda Severless Computing
