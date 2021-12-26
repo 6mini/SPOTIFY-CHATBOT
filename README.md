@@ -37,7 +37,7 @@
 
 - 음악 유사도를 구하기 위한 정보를 위해 스포티파이 API 활용
     - [RDS 이용 PostgreSQL에 아티스트의 top track, 이미지 저장](https://6mini.github.io/project/2021/10/14/sixpotify2/)
-    - [DynamoDB에 아티스트 장르 정보 저장](https://6mini.github.io/project/2021/10/14/Sixpotify3/)
+    - [DynamoDB에 아티스트 장르 정보 저장](https://6mini.github.io/project/2021/10/14/sixpotify3/)
     - [S3 버킷에 EC2 Crontab 이용 아티스트의 top track, audio feature 저장 자동화](https://6mini.github.io/project/2021/10/15/sixpotify6/)
 - [Athena에서 S3 적재 데이터 이용 유사도 산출 후 RDS PostgreSQL에 저장](https://6mini.github.io/project/2021/10/14/sixpotify4/)
 - [EMR 이용 스파크(Spark)에서 분석 및 시각화 핸들링](https://6mini.github.io/project/2021/10/14/sixpotify5/)
